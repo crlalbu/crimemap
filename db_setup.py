@@ -16,9 +16,9 @@ try:
             category VARCHAR(50),
             description VARCHAR(1000),
             updated_at TIMESTAMP,
-            PRIMARY KEY 9id)
+            PRIMARY KEY (id)
         )"""
         cursor.execute(sql);
         connection.commit()
-    finally:
-        connection.close()
+finally:
+    connection.close()

@@ -2,3 +2,7 @@
 venv/
 .vscode
 __pycache__
+
+# don't track this files
+dbconfig.py
+*.pyc
