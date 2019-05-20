@@ -29,3 +29,6 @@ body {
 float: right;
 width: 25%;
 }
+#error {
+    color: red
+}
