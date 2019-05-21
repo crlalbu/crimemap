@@ -5,6 +5,7 @@ from flask import request
 import json
 import datetime
 import dateparser
+import string
 
 import dbconfig
 if dbconfig.test:
@@ -63,7 +64,7 @@ def submitcrime():
     except ValueError:
         return home()
 
-    description = request.form.get("description")
+    description = sanitize_string(request.form.get("description"))
 
     DB.add_crime(category, date, latitude, longitude, description)
 
@@ -75,5 +76,15 @@ def format_date(userdate):
         return datetime.datetime.strftime(date, "%Y-%m-%d")
     except TypeError:
         return None
+
+def sanitize_string(userinput):
+    whitelist = string.ascii_letters + string.digits + " !?$.,;:-'()&"
+    a = filter(lambda x: x in whitelist, userinput)
+    my_str = ""
+    for i in a:
+        my_str += i
+
+    return my_str
+
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
